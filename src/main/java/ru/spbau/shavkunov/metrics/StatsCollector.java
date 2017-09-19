@@ -7,9 +7,9 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class StatsCollector {
-    private static final @NotNull String JAVA_EXTENSION = ".java";
+import static ru.spbau.shavkunov.metrics.Constants.JAVA_EXTENSION;
 
+public class StatsCollector {
     public static @NotNull JavaClassStats getStats(File file) throws WrongExtensionException, FileNotFoundException {
         if (!file.getPath().endsWith(JAVA_EXTENSION)) {
             throw new WrongExtensionException();
