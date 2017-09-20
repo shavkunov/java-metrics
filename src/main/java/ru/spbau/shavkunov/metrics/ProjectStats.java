@@ -20,16 +20,17 @@ public class ProjectStats {
     private int lengthOfAllMethods;
     private double averageMethodNameLength;
 
-    private int fieldsAmount;
-    private int lengthOfAllLocalVariables;
     private int localVarsAmount;
+    private int lengthOfAllLocalVariables;
     private double averageLocalVarsNameLength;
+
+    private int fieldsAmount;
 
     public ProjectStats(Path pathToSource) throws IOException, WrongExtensionException {
         List<Path> javaClasses = Files.walk(pathToSource)
-                                    .filter(Files::isRegularFile)
-                                    .filter(path -> path.endsWith(JAVA_EXTENSION))
-                                    .collect(Collectors.toList());
+                                      .filter(Files::isRegularFile)
+                                      .filter(path -> !path.endsWith(JAVA_EXTENSION))
+                                      .collect(Collectors.toList());
 
         handleClasses(javaClasses);
     }
@@ -46,8 +47,11 @@ public class ProjectStats {
     private void handleStats(@NotNull JavaClassStats stats) {
         methodsAmount += stats.getMethodsAmount();
         lengthOfAllMethods += stats.getSumLengthsOfMethods();
-        fieldsAmount += stats.getFieldsAmount();
+
+        localVarsAmount += stats.getLocalVarsAmount();
         lengthOfAllLocalVariables += stats.getSumLengthsOfLocalVars();
+
+        fieldsAmount += stats.getFieldsAmount();
     }
 
     private void evaluateAverageQuantities() {
