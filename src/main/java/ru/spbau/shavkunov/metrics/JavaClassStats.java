@@ -15,7 +15,7 @@ public class JavaClassStats {
 
     private int fieldsAmount;
     private int sumLengthsOfFields;
-    // TODO : moar stats
+    // TODO: moar stats
 
     public JavaClassStats() {}
 
@@ -35,12 +35,12 @@ public class JavaClassStats {
     }
 
     public int getLocalVarsAmount() {
-        // fields are alse variables
+        // fields are also variables
         return localVarsAmount - fieldsAmount;
     }
 
     public int getSumLengthsOfLocalVars() {
-        // fields are alse variables
+        // fields are also variables
         return sumLengthsOfLocalVars - sumLengthsOfFields;
     }
 }

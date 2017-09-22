@@ -1,20 +1,21 @@
-package ru.spbau.shavkunov.metrics;
+package ru.spbau.shavkunov.metrics.visitors;
 
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import com.github.javaparser.printer.ConcreteSyntaxModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import ru.spbau.shavkunov.metrics.JavaClassStats;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-public class ClassVisitor extends VoidVisitorAdapter<Void> {
-    private @Nullable JavaClassStats stats;
+public class StatsVisitor extends VoidVisitorAdapter<Void> {
+    private @NotNull JavaClassStats stats;
 
-    public ClassVisitor(@NotNull JavaClassStats stats) {
+    public StatsVisitor(@NotNull JavaClassStats stats) {
         this.stats = stats;
     }
 
@@ -30,6 +31,7 @@ public class ClassVisitor extends VoidVisitorAdapter<Void> {
                                    .stream()
                                    .map(var -> var.getName().asString())
                                    .collect(Collectors.toList());
+
         stats.appendFields(fields);
         super.visit(field, arg);
     }

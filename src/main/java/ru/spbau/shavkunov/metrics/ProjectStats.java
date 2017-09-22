@@ -26,11 +26,17 @@ public class ProjectStats {
 
     private int fieldsAmount;
 
-    public ProjectStats(Path pathToSource) throws IOException, WrongExtensionException {
+    public static @NotNull List<Path> getJavaClassesFromSource(@NotNull Path pathToSource) throws IOException {
         List<Path> javaClasses = Files.walk(pathToSource)
                                       .filter(Files::isRegularFile)
                                       .filter(path -> !path.endsWith(JAVA_EXTENSION))
                                       .collect(Collectors.toList());
+
+        return javaClasses;
+    }
+
+    public ProjectStats(Path pathToSource) throws IOException, WrongExtensionException {
+        List<Path> javaClasses = getJavaClassesFromSource(pathToSource);
 
         handleClasses(javaClasses);
     }
