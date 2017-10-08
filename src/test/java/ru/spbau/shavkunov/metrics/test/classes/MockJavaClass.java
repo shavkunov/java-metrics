@@ -1,4 +1,4 @@
-package ru.spbau.shavkunov.metrics.test;
+package ru.spbau.shavkunov.metrics.test.classes;
 
 import org.jetbrains.annotations.NotNull;
 

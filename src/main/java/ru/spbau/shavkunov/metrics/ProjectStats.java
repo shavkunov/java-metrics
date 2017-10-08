@@ -2,13 +2,12 @@ package ru.spbau.shavkunov.metrics;
 
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
+import ru.spbau.shavkunov.metrics.exceptions.WrongExtensionException;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +24,8 @@ public class ProjectStats {
     private double averageLocalVarsNameLength;
 
     private int fieldsAmount;
+    private int lengthOfAllFields;
+    private double averageFieldLength;
 
     public static @NotNull List<Path> getJavaClassesFromSource(@NotNull Path pathToSource) throws IOException {
         List<Path> javaClasses = Files.walk(pathToSource)
@@ -58,10 +59,12 @@ public class ProjectStats {
         lengthOfAllLocalVariables += stats.getSumLengthsOfLocalVars();
 
         fieldsAmount += stats.getFieldsAmount();
+        lengthOfAllFields += stats.getSumLengthsOfFields();
     }
 
     private void evaluateAverageQuantities() {
         averageLocalVarsNameLength = lengthOfAllLocalVariables / localVarsAmount;
         averageMethodNameLength = lengthOfAllMethods / methodsAmount;
+        averageFieldLength = lengthOfAllFields / fieldsAmount;
     }
 }

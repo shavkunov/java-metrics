@@ -1,4 +1,4 @@
-package ru.spbau.shavkunov.metrics;
+package ru.spbau.shavkunov.metrics.exceptions;
 
 public class WrongExtensionException extends Exception {
 }

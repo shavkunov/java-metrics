@@ -1,0 +1,15 @@
+class A {
+    void method() {
+        class B {
+            void method2() {
+                Integer r = 4;
+            }
+        }
+    }
+
+    class B {
+        void method3() {
+            Integer r = 4;
+        }
+    }
+}

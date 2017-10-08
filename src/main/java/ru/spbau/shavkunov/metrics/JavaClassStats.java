@@ -15,7 +15,6 @@ public class JavaClassStats {
 
     private int fieldsAmount;
     private int sumLengthsOfFields;
-    // TODO: moar stats
 
     public JavaClassStats() {}
 
